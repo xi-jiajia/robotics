@@ -18,12 +18,12 @@
     <ClCompile Include="Kinematic.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Pose.cpp">
+    <ClCompile Include="trans_matrix.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Pose.h">
+    <ClInclude Include="trans_matrix.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

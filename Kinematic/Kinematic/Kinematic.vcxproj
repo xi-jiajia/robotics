@@ -140,10 +140,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Kinematic.cpp" />
-    <ClCompile Include="Pose.cpp" />
+    <ClCompile Include="trans_matrix.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Pose.h" />
+    <ClInclude Include="trans_matrix.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
