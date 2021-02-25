@@ -32,11 +32,13 @@ TransMatrix::~TransMatrix()
 
 TransMatrix TransMatrix::TransBase(double delta_x, double delta_y, double delta_z)
 {
-	position_[0] += delta_x;
-	position_[1] += delta_y;
-	position_[2] += delta_z;
+	TransMatrix temp(*this);
 
-	return *this;
+	temp.position_[0] = position_[0] + delta_x;
+	temp.position_[1] = position_[1] + delta_y;
+	temp.position_[2] = position_[2] + delta_z;
+
+	return temp;
 }
 
 TransMatrix TransMatrix::TransSelf(double delta_x, double delta_y, double delta_z)
@@ -48,73 +50,43 @@ TransMatrix TransMatrix::TransSelf(double delta_x, double delta_y, double delta_
 
 TransMatrix TransMatrix::RotBase(char axis, double theta)
 {
-	double n_temp[4]{ 1, 0, 0, 0 };
-	double o_temp[4]{ 0, 1, 0, 0 };
-	double a_temp[4]{ 0, 0, 1, 0 };
-	double p_temp[4]{ 0, 0, 0, 1 };
+	TransMatrix temp(*this);
 
 	double s = sin(theta);
 	double c = cos(theta);
 
 	if (axis == 'x' || axis == 'X')
 	{
-		n_temp[1] = normal_[1] * c - normal_[2] * s;
-		n_temp[2] = normal_[1] * s + normal_[2] * c;
-		o_temp[1] = orientation_[1] * c - orientation_[2] * s;
-		o_temp[2] = orientation_[1] * s + orientation_[2] * c;
-		a_temp[1] = approach_[1] * c - approach_[2] * s;
-		a_temp[2] = approach_[1] * s + approach_[2] * c;
-		p_temp[1] = position_[1] * c - position_[2] * s;
-		p_temp[2] = position_[1] * s + position_[2] * c;
-
-		normal_[1] = n_temp[1];
-		normal_[2] = n_temp[2];
-		orientation_[1] = o_temp[1];
-		orientation_[2] = o_temp[2];
-		approach_[1] = a_temp[1];
-		approach_[2] = a_temp[2];
-		position_[1] = p_temp[1];
-		position_[2] = p_temp[2];
+		temp.normal_[1] = normal_[1] * c - normal_[2] * s;
+		temp.normal_[2] = normal_[1] * s + normal_[2] * c;
+		temp.orientation_[1] = orientation_[1] * c - orientation_[2] * s;
+		temp.orientation_[2] = orientation_[1] * s + orientation_[2] * c;
+		temp.approach_[1] = approach_[1] * c - approach_[2] * s;
+		temp.approach_[2] = approach_[1] * s + approach_[2] * c;
+		temp.position_[1] = position_[1] * c - position_[2] * s;
+		temp.position_[2] = position_[1] * s + position_[2] * c;
 	}
 	else if (axis == 'y' || axis == 'Y')
 	{
-		n_temp[0] = normal_[0] * c + normal_[2] * s;
-		n_temp[2] = -normal_[0] * s + normal_[2] * c;
-		o_temp[0] = orientation_[0] * c + orientation_[2] * s;
-		o_temp[2] = -orientation_[0] * s + orientation_[2] * c;
-		a_temp[0] = approach_[0] * c + approach_[2] * s;
-		a_temp[2] = -approach_[0] * s + approach_[2] * c;
-		p_temp[0] = position_[0] * c + position_[2] * s;
-		p_temp[2] = -position_[0] * s + position_[2] * c;
-
-		normal_[0] = n_temp[0];
-		normal_[2] = n_temp[2];
-		orientation_[0] = o_temp[0];
-		orientation_[2] = o_temp[2];
-		approach_[0] = a_temp[0];
-		approach_[2] = a_temp[2];
-		position_[0] = p_temp[0];
-		position_[2] = p_temp[2];
+		temp.normal_[0] = normal_[0] * c + normal_[2] * s;
+		temp.normal_[2] = -normal_[0] * s + normal_[2] * c;
+		temp.orientation_[0] = orientation_[0] * c + orientation_[2] * s;
+		temp.orientation_[2] = -orientation_[0] * s + orientation_[2] * c;
+		temp.approach_[0] = approach_[0] * c + approach_[2] * s;
+		temp.approach_[2] = -approach_[0] * s + approach_[2] * c;
+		temp.position_[0] = position_[0] * c + position_[2] * s;
+		temp.position_[2] = -position_[0] * s + position_[2] * c;
 	}
 	else if (axis == 'z' || axis == 'Z')
 	{
-		n_temp[0] = normal_[0] * c - normal_[1] * s;
-		n_temp[1] = normal_[0] * s + normal_[1] * c;
-		o_temp[0] = orientation_[0] * c - orientation_[1] * s;
-		o_temp[1] = orientation_[0] * s + orientation_[1] * c;
-		a_temp[0] = approach_[0] * c - approach_[1] * s;
-		a_temp[1] = approach_[0] * s + approach_[1] * c;
-		p_temp[0] = position_[0] * c - position_[1] * s;
-		p_temp[1] = position_[0] * s + position_[1] * c;
-
-		normal_[0] = n_temp[0];
-		normal_[1] = n_temp[1];
-		orientation_[0] = o_temp[0];
-		orientation_[1] = o_temp[1];
-		approach_[0] = a_temp[0];
-		approach_[1] = a_temp[1];
-		position_[0] = p_temp[0];
-		position_[1] = p_temp[1];
+		temp.normal_[0] = normal_[0] * c - normal_[1] * s;
+		temp.normal_[1] = normal_[0] * s + normal_[1] * c;
+		temp.orientation_[0] = orientation_[0] * c - orientation_[1] * s;
+		temp.orientation_[1] = orientation_[0] * s + orientation_[1] * c;
+		temp.approach_[0] = approach_[0] * c - approach_[1] * s;
+		temp.approach_[1] = approach_[0] * s + approach_[1] * c;
+		temp.position_[0] = position_[0] * c - position_[1] * s;
+		temp.position_[1] = position_[0] * s + position_[1] * c;
 	}
 	else
 	{
@@ -122,66 +94,42 @@ TransMatrix TransMatrix::RotBase(char axis, double theta)
 		std::cout << "Axis name must be 'x', 'X', 'y', 'Y', 'z' or 'Z'. " << std::endl << std::endl;
 	}
 
-	return *this;
+	return temp;
 }
 
 TransMatrix TransMatrix::RotSelf(char axis, double theta)
 {
-	double n_temp[4]{ 1, 0, 0, 0 };
-	double o_temp[4]{ 0, 1, 0, 0 };
-	double a_temp[4]{ 0, 0, 1, 0 };
-	double p_temp[4]{ 0, 0, 0, 1 };
+	TransMatrix temp(*this);
 
 	double s = sin(theta);
 	double c = cos(theta);
 
 	if (axis == 'x' || axis == 'X')
 	{
-		o_temp[0] = orientation_[0] * c + approach_[0] * s;
-		o_temp[1] = orientation_[1] * c + approach_[1] * s;
-		o_temp[2] = orientation_[2] * c + approach_[2] * s;
-		a_temp[0] = -orientation_[0] * s + approach_[0] * c;
-		a_temp[1] = -orientation_[1] * s + approach_[1] * c;
-		a_temp[2] = -orientation_[2] * s + approach_[2] * c;
-
-		orientation_[0] = o_temp[0];
-		orientation_[1] = o_temp[1];
-		orientation_[2] = o_temp[2];
-		approach_[0] = a_temp[0];
-		approach_[1] = a_temp[1];
-		approach_[2] = a_temp[2];
+		temp.orientation_[0] = orientation_[0] * c + approach_[0] * s;
+		temp.orientation_[1] = orientation_[1] * c + approach_[1] * s;
+		temp.orientation_[2] = orientation_[2] * c + approach_[2] * s;
+		temp.approach_[0] = -orientation_[0] * s + approach_[0] * c;
+		temp.approach_[1] = -orientation_[1] * s + approach_[1] * c;
+		temp.approach_[2] = -orientation_[2] * s + approach_[2] * c;
 	}
 	else if (axis == 'y' || axis == 'Y')
 	{
-		n_temp[0] = normal_[0] * c - approach_[0] * s;
-		n_temp[1] = normal_[1] * c - approach_[1] * s;
-		n_temp[2] = normal_[2] * c - approach_[2] * s;
-		a_temp[0] = normal_[0] * s + approach_[0] * c;
-		a_temp[1] = normal_[1] * s + approach_[1] * c;
-		a_temp[2] = normal_[2] * s + approach_[2] * c;
-
-		normal_[0] = n_temp[0];
-		normal_[1] = n_temp[1];
-		normal_[2] = n_temp[2];
-		approach_[0] = a_temp[0];
-		approach_[1] = a_temp[1];
-		approach_[2] = a_temp[2];
+		temp.normal_[0] = normal_[0] * c - approach_[0] * s;
+		temp.normal_[1] = normal_[1] * c - approach_[1] * s;
+		temp.normal_[2] = normal_[2] * c - approach_[2] * s;
+		temp.approach_[0] = normal_[0] * s + approach_[0] * c;
+		temp.approach_[1] = normal_[1] * s + approach_[1] * c;
+		temp.approach_[2] = normal_[2] * s + approach_[2] * c;
 	}
 	else if (axis == 'z' || axis == 'Z')
 	{
-		n_temp[0] = normal_[0] * c + orientation_[0] * s;
-		n_temp[1] = normal_[1] * c + orientation_[1] * s;
-		n_temp[2] = normal_[2] * c + orientation_[2] * s;
-		o_temp[0] = -normal_[0] * s + orientation_[0] * c;
-		o_temp[1] = -normal_[1] * s + orientation_[1] * c;
-		o_temp[2] = -normal_[2] * s + orientation_[2] * c;
-
-		normal_[0] = n_temp[0];
-		normal_[1] = n_temp[1];
-		normal_[2] = n_temp[2];
-		orientation_[0] = o_temp[0];
-		orientation_[1] = o_temp[1];
-		orientation_[2] = o_temp[2];
+		temp.normal_[0] = normal_[0] * c + orientation_[0] * s;
+		temp.normal_[1] = normal_[1] * c + orientation_[1] * s;
+		temp.normal_[2] = normal_[2] * c + orientation_[2] * s;
+		temp.orientation_[0] = -normal_[0] * s + orientation_[0] * c;
+		temp.orientation_[1] = -normal_[1] * s + orientation_[1] * c;
+		temp.orientation_[2] = -normal_[2] * s + orientation_[2] * c;
 	}
 	else
 	{
@@ -189,7 +137,7 @@ TransMatrix TransMatrix::RotSelf(char axis, double theta)
 		std::cout << "Axis name must be 'x', 'X', 'y', 'Y', 'z' or 'Z'. " << std::endl << std::endl;
 	}
 
-	return *this;
+	return temp;
 }
 
 void TransMatrix::Show()
