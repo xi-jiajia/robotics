@@ -1,6 +1,15 @@
 #ifndef TRANS_MATRIX_H_
 #define TRANS_MATRIX_H_
 
+struct Coord
+{
+	double x;
+	double y;
+	double z;
+};
+
+void ShowCoord(Coord c);
+
 class TransMatrix
 {
 private:
@@ -16,7 +25,8 @@ public:
 	TransMatrix TransSelf(double delta_x, double delta_y, double delta_z);
 	TransMatrix RotBase(char axis, double theta);
 	TransMatrix RotSelf(char axis, double theta);
-	void Show();
+	Coord TransCoord(Coord c);
+	void ShowTransMatrix();
 };
 
 #endif

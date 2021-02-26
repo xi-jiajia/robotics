@@ -4,6 +4,13 @@
 #include <cmath>
 #include "trans_matrix.h"
 
+void ShowCoord(Coord c)
+{
+	std::cout << c.x << std::endl;
+	std::cout << c.y << std::endl;
+	std::cout << c.z << std::endl << std::endl;
+}
+
 TransMatrix::TransMatrix()
 {
 	double n_temp[4]{ 1, 0, 0, 0 };
@@ -43,9 +50,14 @@ TransMatrix TransMatrix::TransBase(double delta_x, double delta_y, double delta_
 
 TransMatrix TransMatrix::TransSelf(double delta_x, double delta_y, double delta_z)
 {
-	TransBase(delta_x, delta_y, delta_z);
+	TransMatrix temp(*this);
 
-	return *this;
+	for (int i = 0; i < 4; i++)
+	{
+		temp.position_[i] = position_[i] + normal_[i] * delta_x + orientation_[i] * delta_y + approach_[i] * delta_z;
+	}
+
+	return temp;
 }
 
 TransMatrix TransMatrix::RotBase(char axis, double theta)
@@ -104,7 +116,7 @@ TransMatrix TransMatrix::RotSelf(char axis, double theta)
 	double s = sin(theta);
 	double c = cos(theta);
 
-	if (axis == 'x' || axis == 'X')
+	if (axis == 'n' || axis == 'N')
 	{
 		temp.orientation_[0] = orientation_[0] * c + approach_[0] * s;
 		temp.orientation_[1] = orientation_[1] * c + approach_[1] * s;
@@ -113,7 +125,7 @@ TransMatrix TransMatrix::RotSelf(char axis, double theta)
 		temp.approach_[1] = -orientation_[1] * s + approach_[1] * c;
 		temp.approach_[2] = -orientation_[2] * s + approach_[2] * c;
 	}
-	else if (axis == 'y' || axis == 'Y')
+	else if (axis == 'o' || axis == 'O')
 	{
 		temp.normal_[0] = normal_[0] * c - approach_[0] * s;
 		temp.normal_[1] = normal_[1] * c - approach_[1] * s;
@@ -122,7 +134,7 @@ TransMatrix TransMatrix::RotSelf(char axis, double theta)
 		temp.approach_[1] = normal_[1] * s + approach_[1] * c;
 		temp.approach_[2] = normal_[2] * s + approach_[2] * c;
 	}
-	else if (axis == 'z' || axis == 'Z')
+	else if (axis == 'a' || axis == 'A')
 	{
 		temp.normal_[0] = normal_[0] * c + orientation_[0] * s;
 		temp.normal_[1] = normal_[1] * c + orientation_[1] * s;
@@ -140,7 +152,23 @@ TransMatrix TransMatrix::RotSelf(char axis, double theta)
 	return temp;
 }
 
-void TransMatrix::Show()
+Coord TransMatrix::TransCoord(Coord c)
+{
+	double temp_array[3]{};
+	for (int i = 0; i < 3; i++)
+	{
+		temp_array[i] = normal_[i] * c.x + orientation_[i] * c.y + approach_[i] * c.z + position_[i];
+	}
+
+	Coord temp;
+	temp.x = temp_array[0];
+	temp.y = temp_array[1];
+	temp.z = temp_array[2];
+
+	return temp;
+}
+
+void TransMatrix::ShowTransMatrix()
 {
 	std::cout << std::fixed;
 	for (int i = 0; i < 4; i++)
