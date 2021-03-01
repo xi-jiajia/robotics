@@ -152,6 +152,22 @@ TransMatrix TransMatrix::RotSelf(char axis, double theta)
 	return temp;
 }
 
+TransMatrix TransMatrix::Inverse()
+{
+	TransMatrix temp(*this);
+	temp.normal_[1] = orientation_[0];
+	temp.normal_[2] = approach_[0];
+	temp.orientation_[0] = normal_[1];
+	temp.orientation_[2] = approach_[1];
+	temp.approach_[0] = normal_[2];
+	temp.approach_[1] = orientation_[2];
+	temp.position_[0] = -(position_[0] * normal_[0] + position_[1] * normal_[1] + position_[2] * normal_[2]);
+	temp.position_[1] = -(position_[0] * orientation_[0] + position_[1] * orientation_[1] + position_[2] * orientation_[2]);
+	temp.position_[2] = -(position_[0] * approach_[0] + position_[1] * approach_[1] + position_[2] * approach_[2]);
+	
+	return temp;
+}
+
 Coord TransMatrix::TransCoord(Coord c)
 {
 	double temp_array[3]{};

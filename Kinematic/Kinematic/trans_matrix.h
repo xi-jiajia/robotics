@@ -25,6 +25,7 @@ public:
 	TransMatrix TransSelf(double delta_x, double delta_y, double delta_z);
 	TransMatrix RotBase(char axis, double theta);
 	TransMatrix RotSelf(char axis, double theta);
+	TransMatrix Inverse();
 	Coord TransCoord(Coord c);
 	void ShowTransMatrix();
 };

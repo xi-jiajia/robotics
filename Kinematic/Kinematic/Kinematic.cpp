@@ -56,4 +56,21 @@ int main()
 	TransMatrix t2;
 	std::cout << "t2:" << std::endl;
 	t2.RotBase('y', M_PI_2).RotSelf('o', M_PI / 6).TransSelf(5, 0, 0).TransBase(4, 0, 0).ShowTransMatrix();
+
+	TransMatrix t3{};
+	std::cout << "t3:" << std::endl;
+	t3 = t3.RotBase('x', 40 * M_PI / 180);
+	t3.ShowTransMatrix();
+	std::cout << "t3 after inverse:" << std::endl;
+	t3.Inverse().ShowTransMatrix();
+
+	double n_4[4]{ 0.5, 0.866, 0, 0 };
+	double o_4[4]{ 0, 0, 1, 0 };
+	double a_4[4]{ 0.866, -0.5, 0, 0 };
+	double p_4[4]{ 3, 2, 5, 1 };
+	TransMatrix t4{ n_4, o_4, a_4, p_4 };
+	std::cout << "t4:" << std::endl;
+	t4.ShowTransMatrix();
+	std::cout << "t4 after inverse:" << std::endl;
+	t4.Inverse().ShowTransMatrix();
 }
