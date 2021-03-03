@@ -73,4 +73,36 @@ int main()
 	t4.ShowTransMatrix();
 	std::cout << "t4 after inverse:" << std::endl;
 	t4.Inverse().ShowTransMatrix();
+
+	std::cout << "product of t4 and t4 inverse:" << std::endl;
+	TransMatrix t5 = t4.Inverse();
+	(t4 * t5).ShowTransMatrix();
+
+	double n_6[4]{ 1, 0, 0, 0 };
+	double o_6[4]{ 0, 1, 0, 0 };
+	double a_6[4]{ 0, 0, 1, 0 };
+	double p_6[4]{ 0, 0, -3, 0 };
+
+	double n_7[4]{ 0, -1, 0, 0 };
+	double o_7[4]{ 1, 0, 0, 0 };
+	double a_7[4]{ 0, 0, 1, 0 };
+	double p_7[4]{ 0, 0, -4, 0 };
+
+	double n_8[4]{ 0, 0, -1, 0 };
+	double o_8[4]{ 0, -1, 0, 0 };
+	double a_8[4]{ -1, 0, 0, 0 };
+	double p_8[4]{ 3, 0, 5, 1 };
+
+	double n_9[4]{ 0, 1, 0, 0 };
+	double o_9[4]{ 0, 0, 1, 0 };
+	double a_9[4]{ 1, 0, 0, 0 };
+	double p_9[4]{ 2, 2, 4, 1 };
+	
+	TransMatrix t6{ n_6, o_6, a_6, p_6 };
+	TransMatrix t7{ n_7, o_7, a_7, p_7 };
+	TransMatrix t8{ n_8, o_8, a_8, p_8 };
+	TransMatrix t9{ n_9, o_9, a_9, p_9 };
+
+	std::cout << "t6 * t7 * t8 * t9:" << std::endl;
+	(t6 * t7 * t8 * t9).ShowTransMatrix();
 }

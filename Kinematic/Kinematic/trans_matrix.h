@@ -19,6 +19,7 @@ private:
 	double position_[4];
 public:
 	TransMatrix();
+	TransMatrix(const TransMatrix& t);
 	TransMatrix(const double* normal, const double* orientation, const double* approach, const double* position);
 	~TransMatrix();
 	TransMatrix TransBase(double delta_x, double delta_y, double delta_z);
@@ -26,6 +27,7 @@ public:
 	TransMatrix RotBase(char axis, double theta);
 	TransMatrix RotSelf(char axis, double theta);
 	TransMatrix Inverse();
+	TransMatrix operator*(const TransMatrix& t);
 	Coord TransCoord(Coord c);
 	void ShowTransMatrix();
 };

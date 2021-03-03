@@ -24,6 +24,14 @@ TransMatrix::TransMatrix()
 	memcpy(position_, p_temp, 4 * sizeof(double));
 }
 
+TransMatrix::TransMatrix(const TransMatrix& t)
+{
+	memcpy(normal_, t.normal_, 4 * sizeof(double));
+	memcpy(orientation_, t.orientation_, 4 * sizeof(double));
+	memcpy(approach_, t.approach_, 4 * sizeof(double));
+	memcpy(position_, t.position_, 4 * sizeof(double));
+}
+
 TransMatrix::TransMatrix(const double* normal, const double* orientation, const double* approach, const double* position)
 {
 	memcpy(normal_, normal, 4 * sizeof(double));
@@ -165,6 +173,21 @@ TransMatrix TransMatrix::Inverse()
 	temp.position_[1] = -(position_[0] * orientation_[0] + position_[1] * orientation_[1] + position_[2] * orientation_[2]);
 	temp.position_[2] = -(position_[0] * approach_[0] + position_[1] * approach_[1] + position_[2] * approach_[2]);
 	
+	return temp;
+}
+
+TransMatrix TransMatrix::operator*(const TransMatrix& t)
+{
+	TransMatrix temp;
+	
+	for (int i = 0; i < 3; i++)
+	{
+		temp.normal_[i] = normal_[i] * t.normal_[0] + orientation_[i] * t.normal_[1] + approach_[i] * t.normal_[2];
+		temp.orientation_[i] = normal_[i] * t.orientation_[0] + orientation_[i] * t.orientation_[1] + approach_[i] * t.orientation_[2];
+		temp.approach_[i] = normal_[i] * t.approach_[0] + orientation_[i] * t.approach_[1] + approach_[i] * t.approach_[2];
+		temp.position_[i] = normal_[i] * t.position_[0] + orientation_[i] * t.position_[1] + approach_[i] * t.position_[2] + position_[i];
+	}
+
 	return temp;
 }
 
