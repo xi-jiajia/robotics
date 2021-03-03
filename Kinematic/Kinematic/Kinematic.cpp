@@ -105,5 +105,4 @@ int main()
 
 	std::cout << "t6 * t7 * t8 * t9:" << std::endl;
 	(t6 * t7 * t8 * t9).ShowTransMatrix();
-
 }
