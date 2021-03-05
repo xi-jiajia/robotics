@@ -15,15 +15,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Kinematic.cpp">
+    <ClCompile Include="Kinematics.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="trans_matrix.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="robot.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="trans_matrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="robot.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

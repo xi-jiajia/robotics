@@ -24,6 +24,7 @@
     <ProjectGuid>{d93cd516-74de-4d9a-9596-208f621cb4cb}</ProjectGuid>
     <RootNamespace>Kinematic</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Kinematics</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -139,10 +140,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Kinematic.cpp" />
+    <ClCompile Include="Kinematics.cpp" />
+    <ClCompile Include="robot.cpp" />
     <ClCompile Include="trans_matrix.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="robot.h" />
     <ClInclude Include="trans_matrix.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
