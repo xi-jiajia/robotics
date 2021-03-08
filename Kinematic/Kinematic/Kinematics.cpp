@@ -118,8 +118,8 @@ int main()
 	Robot r2(&r2_dh, 1);
 	r2.ShowDH();
 
-	DH r3_dh[2]{ {1, 2, 3, 4}, {5, 6, 7, 8} };
-	Robot r3(r3_dh, 2);
+	DH r3_dh[3]{ {1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12} };
+	Robot r3(r3_dh, 3);
 	r3.ShowDH();
 
 	DH r4_dh[2]{ {0, 0, 10, 0}, {0, 0, 10, 0} };
@@ -129,4 +129,10 @@ int main()
 	r4.ForwardKinematics(r4_joint1).ShowTransMatrix();
 	std::vector<double> r4_joint2{ M_PI_2, 0 };
 	r4.ForwardKinematics(r4_joint2).ShowTransMatrix();
+
+	DH motoman_k10_dh[6]{ {0, 585, 200, M_PI_2}, {M_PI_2, 0, 600, 0}, {0, 0, 115, M_PI_2}, {M_PI, 770, 0, M_PI_2},{M_PI, 0, 0, M_PI_2},{M_PI, 100, 0, M_PI} };
+	Robot motoman_k10(motoman_k10_dh, 6);
+	motoman_k10.ShowDH();
+	std::vector<double> motoman_k10_joint{ 0, 0, 0, 0, 0, 0 };
+	motoman_k10.ForwardKinematics(motoman_k10_joint).ShowTransMatrix();
 }
