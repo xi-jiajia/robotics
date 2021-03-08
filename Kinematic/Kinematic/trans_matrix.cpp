@@ -212,10 +212,10 @@ void TransMatrix::ShowTransMatrix()
 	std::cout << std::fixed;
 	for (int i = 0; i < 4; i++)
 	{
-		std::cout << std::setw(10) << std::right << normal_[i]
-			<< std::setw(15) << std::right << orientation_[i]
-			<< std::setw(15) << std::right << approach_[i]
-			<< std::setw(15) << std::right << position_[i] << std::endl;
+		std::cout << std::setw(10) << normal_[i]
+			<< std::setw(15) << orientation_[i]
+			<< std::setw(15) << approach_[i]
+			<< std::setw(15) << position_[i] << std::endl;
 	}
 	std::cout << std::endl;
 }

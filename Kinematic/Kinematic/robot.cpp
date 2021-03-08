@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include "robot.h"
 
@@ -27,11 +28,17 @@ Robot::~Robot()
 
 void Robot::ShowDH()
 {
-	std::cout << "\t    D_H" << std::endl;
-	std::cout << "theta\td\ta\talpha" << std::endl;
+	std::cout << std::setw(30) << "D-H" << std::endl;
+	std::cout << std::setw(10) << "theta"
+		<< std::setw(15) << "d"
+		<< std::setw(15) << "a"
+		<< std::setw(15) << "alpha" << std::endl;
 	for (int i = 0; i < dof_; i++)
 	{
-		std::cout << theta_[i] << "\t" << d_[i] << "\t" << a_[i] << "\t" << alpha_[i] << std::endl;
+		std::cout << std::setw(10) << theta_[i]
+			<< std::setw(15) << d_[i]
+			<< std::setw(15) << a_[i]
+			<< std::setw(15) << alpha_[i] << std::endl;
 	}
 	std::cout << std::endl;
 }
