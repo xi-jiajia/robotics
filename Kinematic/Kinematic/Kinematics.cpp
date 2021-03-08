@@ -1,6 +1,7 @@
 ﻿#define _USE_MATH_DEFINES
 
 #include <iostream>
+#include <vector>
 #include <cmath>
 #include "trans_matrix.h"
 #include "robot.h"
@@ -120,4 +121,12 @@ int main()
 	DH r3_dh[2]{ {1, 2, 3, 4}, {5, 6, 7, 8} };
 	Robot r3(r3_dh, 2);
 	r3.ShowDH();
+
+	DH r4_dh[2]{ {0, 0, 10, 0}, {0, 0, 10, 0} };
+	Robot r4(r4_dh, 2);
+	r4.ShowDH();
+	std::vector<double> r4_joint1{ 0, 0 };
+	r4.ForwardKinematics(r4_joint1).ShowTransMatrix();
+	std::vector<double> r4_joint2{ M_PI_2, 0 };
+	r4.ForwardKinematics(r4_joint2).ShowTransMatrix();
 }

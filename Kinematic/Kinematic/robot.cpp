@@ -39,6 +39,12 @@ void Robot::ShowDH()
 TransMatrix Robot::ForwardKinematics(const std::vector<double>& joint_angle)
 {
 	TransMatrix temp;
+
+	for (int i = 0; i < joint_angle.size(); i++)
+	{
+		temp = temp.RotSelf('a', joint_angle[i]).TransSelf(0, 0, d_[i]).TransSelf(a_[i], 0, 0).RotSelf('a', alpha_[i]);
+	}
+
 	return temp;
 }
 
