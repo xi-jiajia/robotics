@@ -159,7 +159,7 @@ int main()
 		{0, 0, 115, M_PI_2},
 		{M_PI, 770, 0, M_PI_2},
 		{M_PI, 0, 0, M_PI_2},
-		{M_PI, 100, 0, M_PI}
+		{0, 100, 0, 0}
 	};
 	Robot motoman_k10(motoman_k10_dh, 6);
 	std::cout << "dh of motoman k10:" << std::endl;
