@@ -1,6 +1,9 @@
+#define _USE_MATH_DEFINES
+
 #include <iostream>
 #include <iomanip>
 #include <vector>
+#include <cmath>
 #include "robot.h"
 
 Robot::Robot()
@@ -55,8 +58,12 @@ TransMatrix Robot::ForwardKinematics(const std::vector<double>& joint_angle)
 	return temp;
 }
 
-std::vector<double> Robot::InverseKinematics(const TransMatrix& t)
+InverseSolution Robot::InverseKinematics(const double* normal, const double* orientation, const double* approach, const double* position)
 {
-	std::vector<double> temp;
+	InverseSolution temp;
+
+	double joint_1_1 = atan2(position[1], position[0]);
+	double joint_1_2 = joint_1_1 + M_PI;
+
 	return temp;
 }

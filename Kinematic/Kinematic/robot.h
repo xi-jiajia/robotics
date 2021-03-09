@@ -12,6 +12,16 @@ struct DH
 	double alpha;
 };
 
+struct InverseSolution
+{
+	std::vector <double> joint_1;
+	std::vector <double> joint_2;
+	std::vector <double> joint_3;
+	std::vector <double> joint_4;
+	std::vector <double> joint_5;
+	std::vector <double> joint_6;
+};
+
 class Robot
 {
 private:
@@ -26,8 +36,8 @@ public:
 	Robot(const DH* dh, int dof);
 	~Robot();
 	void ShowDH();
-	TransMatrix ForwardKinematics(const std::vector<double>& joint_angle); // 由关节角度到末端位姿
-	std::vector<double> InverseKinematics(const TransMatrix& t); // 由末端位姿到关节角度
+	TransMatrix ForwardKinematics(const std::vector<double>& joint_angle);
+	InverseSolution InverseKinematics(const double* normal, const double* orientation, const double* approach, const double* position);
 };
 
 #endif

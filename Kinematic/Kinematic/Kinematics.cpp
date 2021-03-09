@@ -168,5 +168,8 @@ int main()
 	std::vector<double> motoman_k10_joint{ 0, 0, 0, 0, 0, 0 };
 	std::cout << "trans matrix of motoman k10 when joints are (0, 0, 0, 0, 0, 0):" << std::endl;
 	motoman_k10.ForwardKinematics(motoman_k10_joint).ShowTransMatrix();
+
+	// robot 225
+
 }
 //*/
